@@ -1,0 +1,33 @@
+# workflow to release repo publicly.
+name: release
+
+# Controls when the workflow will run
+on:
+  # Trigger the workflow on push events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "publish"
+  publish:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout Private Repository
+        uses: actions/checkout@v4
+        with:
+          repository: lwray-renesas/TBB-Demo-Private
+          ref: main
+          token: ${{ secrets.TBB_DEMO_PAT }}
+
+      - name: Push to Public Repository
+        run: |
+          git remote add public https://github.com/lwray-renesas/TBB-Demo.git
+          git push --force public main
