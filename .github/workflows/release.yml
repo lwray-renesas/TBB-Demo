@@ -26,6 +26,7 @@ jobs:
           repository: lwray-renesas/TBB-Demo-Private
           ref: main
           token: ${{ secrets.TBB_DEMO_PAT }}
+          fetch-depth: 0  # Ensures full history is cloned
 
       - name: Push to Public Repository
         run: |
