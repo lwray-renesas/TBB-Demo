@@ -1,4 +1,4 @@
-# workflow to release repo publicly.
+# Workflow to release repo publicly.
 name: release
 
 # Controls when the workflow will run
