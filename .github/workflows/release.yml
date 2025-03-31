@@ -28,6 +28,9 @@ jobs:
           token: ${{ secrets.TBB_DEMO_PAT }}
 
       - name: Push to Public Repository
+        env:
+          PUBLIC_ACCESS_EMAIL: ${{ secrets.TBB_DEMO_EMAIL }}
         run: |
+          git config --global user.email "$PUBLIC_ACCESS_EMAIL"
           git remote add public https://github.com/lwray-renesas/TBB-Demo.git
           git push --force public main
